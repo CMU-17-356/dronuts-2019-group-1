@@ -1,0 +1,19 @@
+{
+  "name": "dronuts-2019-group-1",
+  "version": "1.0.0",
+  "description": "Dronuts project, Spring 2019. Group 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CMU-17-356/dronuts-2019-group-1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CMU-17-356/dronuts-2019-group-1/issues"
+  },
+  "homepage": "https://github.com/CMU-17-356/dronuts-2019-group-1#readme"
+}
