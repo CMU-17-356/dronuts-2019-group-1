@@ -1,0 +1,62 @@
+// users
+{
+  "user_id": 1,
+  "username": "agao",
+  "password": "12345",
+  "full_name": "Andy Gao",
+  "email": "agao@andrew.cmu.edu",
+  "address": "5023 Forbes Ave",
+  "phone_number": 9011234567,
+}
+// customers
+{
+  "customer_id": 1,
+  "user_id": 1,
+  "address": "5023 Forbes Ave",
+  "birthday": 12041997,
+  "fav_donut": "pineapple",
+  "credit_card": 1234567898765432
+}
+// employees
+{
+  "employee_id": 1,
+  "user_id": 1,
+  "position": "manager"
+}
+// order
+{
+  "order_id": 1,
+  "customer_id": 1,
+  "employee_id": 1,
+  "time": "2012-11-04 14:55:45",
+  "drone_id": 1
+}
+// drones
+{
+  "drone_id": 1,
+  "drone_name": "charles",
+  "drone_model": "xyzrqs",
+  "location": [
+    12,
+    423
+  ],
+  "in_use": "true"
+}
+// donut list
+{
+  "donut_list_id": 1,
+  "order_id": 1,
+  "donut_id": 2
+}
+
+
+{
+  "donut_id": 1,
+  "donut_name": "Pineapple",
+  "ingredients": [
+    "pineapple",
+    "flour",
+    "sugar"
+  ],
+  "price": 3.50
+}
