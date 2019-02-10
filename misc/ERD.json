@@ -7,9 +7,6 @@
   "email": "agao@andrew.cmu.edu",
   "address": "5023 Forbes Ave",
   "phone_number": 9011234567,
-  "birthday": 12041997,
-  "favorite_donut": "pineapple",
-  "credit_card": 1234567898765432
 }
 // customers
 {
@@ -29,12 +26,8 @@
 // order
 {
   "order_id": 1,
-  "user_id": 1,
+  "customer_id": 1,
   "employee_id": 1,
-  "donut": [
-    "pineapple",
-    "watermelon"
-  ],
   "time": "2012-11-04 14:55:45",
   "drone_id": 1
 }
@@ -49,7 +42,12 @@
   ],
   "in_use": "true"
 }
-
+// donut list
+{
+  "donut_list_id": 1,
+  "order_id": 1,
+  "donut_id": 2
+}
 
 
 {
