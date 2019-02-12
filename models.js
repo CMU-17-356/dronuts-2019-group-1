@@ -31,7 +31,7 @@ const order = Joi.object().keys({
   employee_id: generalID.required(),
   customer_id:  generalID.required(),
   drone_id: generalID.required(),
-  time: Joi.date().required(),
+  time: Joi.date().iso().required(),
   order_status: Joi.string()
 });
 
@@ -58,10 +58,10 @@ const donut = Joi.object().keys({
 
 module.exports = {
   user: user,
-  '/customers': customer,
-  '/employees': employee,
-  '/orders': order,
-  '/drones': drone,
-  '/donut_lists': donut_list,
-  '/donuts': donut
+  customer: customer,
+  employee: employee,
+  order: order,
+  drone: drone,
+  donut_list: donut_list,
+  donut: donut
 };
