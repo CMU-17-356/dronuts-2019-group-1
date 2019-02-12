@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const generalID = Joi.string().guid({version: 'uuidv4'});
+const generalID = Joi.string().guid({ version: 'uuidv4' });
 
 const user = Joi.object().keys({
   user_id: generalID.required(),
@@ -15,8 +15,8 @@ const customer = Joi.object().keys({
   customer_id: generalID.required(),
   user_id: generalID.required(),
   address: Joi.string().required(),
-  birthday: Joi.date()
-  fav_donut: Joi.string()
+  birthday: Joi.date(),
+  fav_donut: Joi.string(),
   credit_card: Joi.string().creditCard()
 });
 
@@ -29,7 +29,7 @@ const employee = Joi.object().keys({
 const order = Joi.object.keys({
   order_id: generalID.required(),
   employee_id: generalID.required(),
-  customer_id:  generalID.required(),
+  customer_id: generalID.required(),
   drone_id: generalID.required(),
   time: Joi.date().required(),
   order_status: Joi.string()

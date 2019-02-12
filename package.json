@@ -3,10 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "client-install": "cd client && npm install",
+    "start": "concurrently \"npm run server\" \"npm run client\" ",
+    "server": "nodemon ./bin/www",
+    "client": "npm start --prefix client",
     "test": "jest"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
@@ -16,7 +20,11 @@
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {
-    "jest": "^24.1.0",
+    "concurrently": "^4.1.0",
+    "eslint": "^5.12.0",
+    "eslint-config-google": "^0.12.0",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.10",
     "supertest": "^3.4.2"
   }
 }
