@@ -8,15 +8,15 @@ const user = Joi.object().keys({
   full_name: Joi.string().required(),
   password: Joi.string().required(),
   phone_number: Joi.number().integer(),
-  email: Joi.string().required()
+  email: Joi.string()
 });
 
 const customer = Joi.object().keys({
   customer_id: generalID.required(),
   user_id: generalID.required(),
   address: Joi.string().required(),
-  birthday: Joi.date()
-  fav_donut: Joi.string()
+  birthday: Joi.date(),
+  fav_donut: Joi.string(),
   credit_card: Joi.string().creditCard()
 });
 
@@ -26,7 +26,7 @@ const employee = Joi.object().keys({
   position: Joi.string().required()
 });
 
-const order = Joi.object.keys({
+const order = Joi.object().keys({
   order_id: generalID.required(),
   employee_id: generalID.required(),
   customer_id:  generalID.required(),
@@ -35,7 +35,7 @@ const order = Joi.object.keys({
   order_status: Joi.string()
 });
 
-const drone = Joi.object.keys({
+const drone = Joi.object().keys({
   drone_id: generalID.required(),
   drone_name: Joi.string().required(),
   drone_model: Joi.string().required(),
@@ -43,13 +43,13 @@ const drone = Joi.object.keys({
   in_use: Joi.boolean()
 });
 
-const donut_list = Joi.object.keys({
+const donut_list = Joi.object().keys({
   donut_list_id: generalID.required(),
   donut_id: generalID.required(),
   order_id: generalID.required()
 });
 
-const donut = Joi.object.keys({
+const donut = Joi.object().keys({
   donut_id: generalID.required(),
   donut_name: Joi.string().required(),
   ingredients: Joi.array().items(Joi.string()),
@@ -57,7 +57,7 @@ const donut = Joi.object.keys({
 });
 
 module.exports = {
-  '/users': user,
+  user: user,
   '/customers': customer,
   '/employees': employee,
   '/orders': order,
