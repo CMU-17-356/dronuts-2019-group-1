@@ -31,3 +31,4 @@ app.get('*', function (request, response) {
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
+module.exports = app;
