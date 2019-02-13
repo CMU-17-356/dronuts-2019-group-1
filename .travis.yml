@@ -14,8 +14,6 @@ env:
     - DOCKER_MACHINE_NAME="dronuts-2019-group-1"
 
 script:
-  - cd ./server && npm test
-  - cd ..
   - docker-compose --file docker-compose.prod.yml build 
 
 deploy:
