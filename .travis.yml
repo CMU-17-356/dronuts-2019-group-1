@@ -15,6 +15,7 @@ env:
 
 script:
   - cd ./server && npm test
+  - cd ..
   - cd ./client && npm test
   - docker-compose --file docker-compose.prod.yml build 
 
