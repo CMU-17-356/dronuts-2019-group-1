@@ -1,10 +1,10 @@
-FROM node:9.4.0
+FROM node:8
 
 WORKDIR /usr/app
 
 COPY package*.json ./
 
-RUN npm install -qy
+RUN npm install
 
 COPY . .
 
