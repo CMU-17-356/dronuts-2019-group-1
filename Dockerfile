@@ -1,16 +1,28 @@
-FROM node:8-alpine
-MAINTAINER <GROUP_NAME_HERE>
+# Setup and build the client
 
-# Change working directory
-WORKDIR /usr/src/app
+FROM node:8-alpine as client
 
-# Install App Dependencies
-COPY package*.json ./
+WORKDIR /usr/app/client/
+COPY client/package*.json ./
 RUN npm install
+COPY client/ ./
+RUN npm run build
 
-# Copy App Source
-COPY . .
-#TODO Run any build scripts here
 
-EXPOSE 80
-CMD [ "npm", "start" ]
+# Setup the server
+
+FROM node:8-alpine
+
+WORKDIR /usr/app/
+COPY --from=client /usr/app/client/build/ ./client/build/
+
+WORKDIR /usr/app/server/
+COPY server/package*.json ./
+RUN npm install
+COPY server/ ./
+
+ENV PORT 3001
+
+EXPOSE 3001
+
+CMD ["npm", "start"]
