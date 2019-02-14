@@ -1,4 +1,4 @@
-const models = require('../models')
+const models = require('../src/models')
 const Joi = require('joi')
 
 test('creating a user', () => {
