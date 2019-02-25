@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 
@@ -12,6 +13,7 @@ const styles = {
   },
   grow: {
     flexGrow: 1,
+
   },
   menuButton: {
     marginLeft: -12,
@@ -19,26 +21,30 @@ const styles = {
   },
 };
 
-function ButtonAppBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar className={classes.colorChange} position="static" color="primary">
-        <Toolbar>
-          <Typography variant="h5" color="inherit" className={classes.grow}>
-            Dronuts
+
+class Nav extends Component {
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.root}>
+        <AppBar className={classes.colorChange} position="static" color="primary">
+          <Toolbar>
+            <Typography component={Link} to="/" variant="h5" color="inherit" className={classes.grow} style={{ textDecoration: 'none' }}>
+              Dronuts
           </Typography>
-          <Button color="inherit">Cart</Button>
-          <Button color="inherit">Menu</Button>
-          <Button color="inherit">Logout</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+            <Button component={Link} to="/cart" color="inherit">Cart</Button>
+          </Toolbar>
+        </AppBar>
+      </div>
+
+    );
+
+  }
+
 }
 
-ButtonAppBar.propTypes = {
+Nav.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ButtonAppBar);
+export default withStyles(styles)(Nav);
