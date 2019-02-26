@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 class Cart extends Component {
   render() {
     return (
-      <p>Cart</p>
+    	<div>
+	      	<p>Cart</p>
+	      	<Link to='/location'>
+	      		Location Page 
+	      	</Link>
+        </div>
     );
 
   }
