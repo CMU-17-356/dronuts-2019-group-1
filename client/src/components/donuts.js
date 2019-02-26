@@ -4,11 +4,12 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import Info from './info'
+import Added from './added'
 // import axios from 'axios;'
 
 const styles = theme => ({
@@ -37,7 +38,7 @@ const styles = theme => ({
     flexGrow: 1,
   },
 });
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
 
 class Donuts extends Component {
   state = {
@@ -68,7 +69,7 @@ class Donuts extends Component {
       <div className={classNames(classes.layout, classes.cardGrid)}>
         <Grid container spacing={40}>
           {donuts.map((donut, num) => (
-            <Grid item key={donut} sm={6} md={4} lg={3}>
+            <Grid item key={donut.id} sm={6} md={4} lg={3}>
               <Card className={classes.card}>
                 <CardMedia
                   className={classes.cardMedia}
@@ -81,15 +82,11 @@ class Donuts extends Component {
                   </Typography>
                   <Typography>
                     {donut.description}
-              </Typography>
+                  </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary">
-                    More info
-              </Button>
-                  <Button size="small" color="primary">
-                    Add to Cart
-              </Button>
+                  <Info name={donut.name} />
+                  <Added />
                 </CardActions>
               </Card>
             </Grid>

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Button, Avatar } from '@material-ui/core';
+import logo from '../img/logo.png';
 
 const styles = {
   colorChange: {
@@ -19,6 +20,9 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
+  avatar: {
+    margin: 10,
+  },
 };
 
 
@@ -29,9 +33,11 @@ class Nav extends Component {
       <div className={classes.root}>
         <AppBar className={classes.colorChange} position="static" color="primary">
           <Toolbar>
-            <Typography component={Link} to="/" variant="h5" color="inherit" className={classes.grow} style={{ textDecoration: 'none' }}>
+            <Avatar alt="Logo" component={Link} to="/" src={logo} className={classes.avatar} />
+            <Typography component={Link} to="/" variant="h4" color="inherit" className={classes.grow} style={{ textDecoration: 'none' }}>
               Dronuts
           </Typography>
+            <Button component={Link} to="/menu" color="inherit">Menu</Button>
             <Button component={Link} to="/cart" color="inherit">Cart</Button>
           </Toolbar>
         </AppBar>

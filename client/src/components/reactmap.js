@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+import { GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import Geocode from "react-geocode";
 import ReactDOM from 'react-dom';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
+import Footer from './footer';
 import './reactmap.css';
 
 // Define very basic width/height for the map box
@@ -22,11 +22,12 @@ export class CurrentLocation extends Component {
 	constructor(props) {
 		super(props);
 
-		const {lat, lng} = this.props.initialCenter;
+		const { lat, lng } = this.props.initialCenter;
 		this.state = {
 			currentLocation: {
 				lat: lat,
-				lng: lng
+				lng: lng,
+				location: ""
 			}
 		};
 	}
@@ -68,6 +69,18 @@ export class CurrentLocation extends Component {
 							lng: coords.longitude
 						}
 					});
+					Geocode.setApiKey('AIzaSyAns2uECS5cjVGMh7CuTw5HuVsqluYGc48');
+					Geocode.fromLatLng(coords.latitude, coords.longitude).then(
+						response => {
+							const address = response.results[0].formatted_address;
+							this.setState({
+								location: address
+							})
+						},
+						error => {
+							alert(error);
+						}
+					);
 				});
 			}
 		}
@@ -80,7 +93,7 @@ export class CurrentLocation extends Component {
 	loadMap() {
 		if (this.props && this.props.google) {
 			// checks if google is available
-			const {google} = this.props;
+			const { google } = this.props;
 			const maps = google.maps;
 
 			const mapRef = this.refs.map;
@@ -89,7 +102,7 @@ export class CurrentLocation extends Component {
 			const node = ReactDOM.findDOMNode(mapRef);
 
 			let { zoom } = this.props;
-			const {lat, lng} = this.state.currentLocation;
+			const { lat, lng } = this.state.currentLocation;
 			const center = new maps.LatLng(lat, lng);
 			const mapConfig = Object.assign(
 				{},
@@ -107,7 +120,7 @@ export class CurrentLocation extends Component {
 	// Will be responsible for actually calling the method on the 
 	//   child component
 	renderChildren() {
-		const {children} = this.props;
+		const { children } = this.props;
 		if (!children) return;
 
 		return React.Children.map(children, c => {
@@ -139,10 +152,10 @@ export class CurrentLocation extends Component {
 CurrentLocation.defaultProps = {
 	zoom: 18,
 	initialCenter: {
-		lat: 40.4416, 
-		lng: -79.9413 
+		lat: 40.4416,
+		lng: -79.9413
 	},
-	centerAroundCurrentLocation: false,
+	centerAroundCurrentLocation: true,
 	visible: true
 };
 
@@ -155,7 +168,7 @@ export class MapContainer extends Component {
 		showingInfoWindow: false, // Hides or shows the infoWindow
 		activeMarker: {}, // Shows the active marker upon click
 		selectedPlace: {}, // Shows the infoWindow to the selected place upon a marker
-		mostRecentLat: " ", 
+		mostRecentLat: " ",
 		mostRecentLng: " ",
 		displayedText: "Use current location, or drag pin below",
 	};
@@ -188,15 +201,15 @@ export class MapContainer extends Component {
 		var temp = marker.getPosition();
 		var newLat = temp.lat();
 		var newLng = temp.lng();
-		var newText = "Your selected location is:\n" + 
-			newLat + ", " + newLng;
+		// var newText = "Your selected location is:\n" +
+		// 	newLat + ", " + newLng;
 		Geocode.setApiKey('AIzaSyAns2uECS5cjVGMh7CuTw5HuVsqluYGc48');
 		Geocode.fromLatLng(newLat, newLng).then(
 			response => {
 				const address = response.results[0].formatted_address;
-    			this.setState({
-    				displayedText: address
-    			})
+				this.setState({
+					displayedText: address
+				})
 			},
 			error => {
 				alert(error);
@@ -213,7 +226,7 @@ export class MapContainer extends Component {
 	render() {
 		return (
 			<div className="overall-div">
-				<Link to='/'>
+				<Link to='/cart' style={{ textDecoration: 'none' }}>
 					<div className="button-div">
 						<Button variant="contained">
 							Confirm Location
@@ -221,8 +234,8 @@ export class MapContainer extends Component {
 					</div>
 				</Link>
 
-				<h1 className="map-text">{this.state.displayedText}</h1>
-				<h2 className="map-text">{this.determineText()}</h2>
+				<h1 className="map-text">{this.state.displayedText} </h1>
+				{/* <h2 className="map-text">{this.determineText()} </h2> */}
 
 				<CurrentLocation
 					centerAroundCurrentLocation
@@ -230,6 +243,7 @@ export class MapContainer extends Component {
 				>
 
 					<Marker
+
 						onClick={this.onMarkerClick}
 						draggable={true}
 						onDragend={this.updateLocation}
@@ -248,7 +262,8 @@ export class MapContainer extends Component {
 
 					</InfoWindow>
 				</CurrentLocation>
-				
+				<Footer />
+
 			</div>
 		);
 	}
