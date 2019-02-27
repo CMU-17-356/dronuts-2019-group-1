@@ -79,7 +79,7 @@ function Album(props) {
             <div className={classes.heroButtons}>
               <Grid container spacing={24} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary" component={Link} to="/menu">
+                  <Button variant="contained" color="primary" component={Link} to="/login">
                     Order Now
                   </Button>
                 </Grid>
