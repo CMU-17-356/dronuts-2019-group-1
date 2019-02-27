@@ -34,7 +34,7 @@ class AlertDialog extends React.Component {
           <DialogTitle id="alert-dialog-title">{this.props.name}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              This is one of our special donuts. Get it while it lasts!
+              Ingredients: {this.props.desc}
             </DialogContentText>
           </DialogContent>
           <DialogActions>

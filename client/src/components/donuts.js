@@ -37,6 +37,9 @@ const styles = theme => ({
   cardContent: {
     flexGrow: 1,
   },
+  downSpace: {
+    marginBottom: '10%'
+  }
 });
 
 
@@ -80,12 +83,13 @@ class Donuts extends Component {
                   <Typography gutterBottom variant="h5" component="h2">
                     {donut.name}
                   </Typography>
-                  <Typography>
-                    {donut.description}
+                  <Typography className={classes.downSpace} variant="h6" component="h6">
+                    ${donut.price}
                   </Typography>
+
                 </CardContent>
                 <CardActions>
-                  <Info name={donut.name} />
+                  <Info name={donut.name} desc={donut.description} />
                   <Added />
                 </CardActions>
               </Card>
