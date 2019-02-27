@@ -4,7 +4,8 @@ import Main from './main';
 import Menu from './menu';
 import Error from './error';
 import ReactMap from './reactmap';
-import Checkout from './checkout/Checkout'
+import Checkout from './checkout/Checkout';
+import {IncomingOrdersList, IncomingOrdersRemoved} from './employee';
 
 class Routes extends Component {
   render() {
@@ -15,6 +16,8 @@ class Routes extends Component {
         <Route path="/menu" component={Menu} />
         <Route path="/cart" component={Checkout} />
         <Route path="/location" component={ReactMap} />
+        <Route path="/employee" component={IncomingOrdersList} />
+        <Route path="/employeee" component={IncomingOrdersRemoved} />
         <Route component={Error} />
       </Switch>
 
