@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import logo from "../img/Dronut.png"
 
 const styles = theme => ({
   appBar: {
@@ -66,12 +67,9 @@ function Album(props) {
         {/* Hero unit */}
         <div className={classes.heroUnit}>
           <div className={classes.heroContent}>
-            <Typography component="h3" variant="h3" align="center" color="textPrimary" gutterBottom>
-              Dronuts
-            </Typography>
             <Grid container spacing={24} justify="center">
               <Grid item>
-                <img alt="drone delivering donuts" src="http://www.eatout.co.za/wp-content/uploads/2016/03/Dronuts-long.jpg" />
+                <img alt="drone delivering donuts" src={logo} style={{ width: "100%" }} />
               </Grid>
             </Grid>
             <Typography variant="h6" align="center" color="textSecondary" paragraph>
@@ -81,7 +79,7 @@ function Album(props) {
             <div className={classes.heroButtons}>
               <Grid container spacing={24} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary" component={Link} to="/menu">
+                  <Button variant="contained" color="primary" component={Link} to="/login">
                     Order Now
                   </Button>
                 </Grid>

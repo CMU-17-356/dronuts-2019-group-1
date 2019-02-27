@@ -34,7 +34,8 @@ class AddressForm extends Component {
               <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
               Find/Save Location
             </Button>
-            <Typography variant="h6" component="h6">Current Location</Typography>
+            <Typography variant="h6" component="h6">Current Location: Gates Center for Computer Science, Pittsburgh, PA 15213, USA
+</Typography>
           </Grid>
 
         </Grid>
