@@ -8,8 +8,7 @@ import ReactMap from './reactmap';
 import Checkout from './checkout/Checkout';
 import {IncomingOrdersList, IncomingOrdersRemoved} from './employee';
 
-import Checkout from './checkout/Checkout'
-import Login from './login'
+import Login from './login';
 
 
 class Routes extends Component {
