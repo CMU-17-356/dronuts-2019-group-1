@@ -1,31 +1,67 @@
 import React, { Component } from 'react'
+import axios from "axios";
 //import logo from './img/Dronut.png';
 import './employee.css'
 import {Link} from 'react-router-dom'
 import SimpleSnackBar from './fullfilled_order'
 
-function OrderRow(props){
+class OrderRow extends Component{
+	constructor(props){
+		super(props);
+		this.state = {drone_id: 0};
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
 
-	return (
-		<tr>
-			<td align="center">
-				<div class="Incoming">
-					<h2>Order #{props.id} </h2>
-					<b> Order Summary: </b>
-					<p>
-					1 x Glazed Donut  <br/>
-					2 x Sprinkled Donut 
-					</p>
-					<h3> Pack Into: Drone 1 </h3>
-				</div>
-				<Link to='/employeee'>
-					<div class="confirmation_order_sent">
-						<SimpleSnackBar/>
+	handleChange(event){
+		this.setState({drone_id: event.target.value});
+	}
+
+	handleSubmit(event){
+		alert('submitted');
+		event.preventDefault();
+		alert(this.state.drone_id);
+		var link = `http://drones.17-356.isri.cmu.edu/api/drones/${this.state.drone_id}/send`;
+		axios.put(link, {
+			lat: 5.0, //link to db to change lat and lon
+			lon: 4.0
+		}).then(response => {
+			console.log(response.data)
+		}).catch(error => {
+			console.log(error)
+		});
+		//call api 
+	}
+
+	render(){
+		return (
+			<tr>
+				<td align="center">
+					<div class="Incoming">
+						<h2>Order {this.props.id} </h2>
+						<b> Order Summary: </b>
+						<p>
+						1 x Glazed Donut  <br/>
+						2 x Sprinkled Donut 
+						</p>
+						<form onSubmit={this.handleSubmit}>
+					        <label>
+					          Choose Drone:
+					          <select value={this.state.drone_id} onChange={this.handleChange}>
+					            <option value={1}>Drone 1</option>
+					            <option value={2}>Drone 2</option>
+					            <option value={3}>Drone 3</option>
+					            <option value={4}>Drone 4</option>
+					          </select>
+					        </label>
+					        <input type="submit" value="Submit" />
+					    </form>
 					</div>
-				</Link>
-			</td>
-		</tr>
-	);
+					
+				</td>
+			</tr>
+		);
+	}
 }
 
 class IncomingOrdersRemoved extends Component {

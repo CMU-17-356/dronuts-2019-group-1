@@ -25,6 +25,7 @@ class Routes extends Component {
         <Route path="/employeee" component={IncomingOrdersRemoved} />
 
         <Route path="/login" component={Login} />
+        <Route path="/drones" component={() => { window.location = 'http://drones.17-356.isri.cmu.edu'; return null;} }/>
         <Route component={Error} />
       </Switch>
 
