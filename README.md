@@ -12,7 +12,7 @@ The application can be run in development mode locally by using `npm start` to r
 Running `npm run build` will create an optimized production build for the app, which is minified and has the filenames hashed.
 
 ### Make and deploy changes through Travis CI
-Commits are automatically built through Travis CI, the Continuous Integration Tool used for this project. This tests to ensure that the code can build correctly, before allowing any changes to be pushed to the repo. The build status of our code can be seen by our build status button at the top. If you are forking your own repository and want to use your own Travis CI, Enable [travis-ci.com] for this repository. To do this, go to the travis website, and grant Travis permissions over your repository.
+Commits are automatically built through Travis CI, the Continuous Integration Tool used for this project. This tests to ensure that the code can build correctly, before allowing any changes to be pushed to the repo. The build status of our code can be seen by our build status button at the top. If you are forking your own repository and want to use your own Travis CI, Enable http://travis-ci.com for this repository. To do this, go to the travis website, and grant Travis permissions over your repository.
 
 
 ### Deploy on Azure VMs
