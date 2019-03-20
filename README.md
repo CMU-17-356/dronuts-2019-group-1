@@ -16,7 +16,17 @@ Commits are automatically built through Travis CI, the Continuous Integration To
 
 
 ### Deploy on Azure VMs
-In order to deploy,
+In order to deploy on Azure VMs, make sure you have an Azure account setup. For more info, visit http://https://github.com/CMU-17-356/dronut-starter
+
+Once setup, to deploy onto Azure VMs, simply run
+
+```
+docker-compose down
+docker-compose build
+docker-compose -f docker-compose.prod.yml up
+```
+This should deploy your code onto Azure VMs and run successfully on the web.
+
 
 ### How to run linting, tests, and npm-cleanup scripts/tools
 
