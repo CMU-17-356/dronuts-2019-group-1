@@ -19,3 +19,5 @@ Commits are automatically built through Travis CI, the Continuous Integration To
 In order to deploy,
 
 ### How to run linting, tests, and npm-cleanup scripts/tools
+
+To remove extraneous packages, run `npm prune [[<@scope>/]<pkg>...] [--production] [--dry-run] [--json]`. This command removes “extraneous” packages. If a package name is provided, then only packages matching one of the supplied names are removed. Extraneous packages are packages that are not listed on the parent package’s dependencies list. More information can be found here: https://docs.npmjs.com/cli/prune.html
