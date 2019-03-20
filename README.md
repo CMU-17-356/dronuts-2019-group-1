@@ -28,11 +28,11 @@ docker-compose -f docker-compose.prod.yml up
 This should deploy your code onto Azure VMs and run successfully on the web.
 
 
-### How to run linting, tests, and npm-cleanup scripts/tools
+### How to run linting, tests, and additional scripts/tools
 
 To run linting on code, we are using eslint. Thus, to lint a directory or file:
 ```
 eslint [directory/filename]
 ```
 
-To remove extraneous packages, run `npm prune [[<@scope>/]<pkg>...] [--production] [--dry-run] [--json]`. This command removes “extraneous” packages. If a package name is provided, then only packages matching one of the supplied names are removed. Extraneous packages are packages that are not listed on the parent package’s dependencies list. More information can be found here: https://docs.npmjs.com/cli/prune.html
+To clean up any installed npm packages or remove extraneous packages, run `npm prune [[<@scope>/]<pkg>...] [--production] [--dry-run] [--json]`. This command removes “extraneous” packages. If a package name is provided, then only packages matching one of the supplied names are removed. Extraneous packages are packages that are not listed on the parent package’s dependencies list. More information can be found here: https://docs.npmjs.com/cli/prune.html
