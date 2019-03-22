@@ -11,7 +11,9 @@ import Typography from '@material-ui/core/Typography';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
-
+import axios from 'axios';
+import firebase from '../../firebase-config'
+const db = firebase.firestore();
 const styles = theme => ({
   appBar: {
     position: 'relative',
@@ -51,18 +53,7 @@ const styles = theme => ({
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <PaymentForm />;
-    case 2:
-      return <Review />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
+
 
 class Checkout extends React.Component {
   state = {
@@ -76,6 +67,7 @@ class Checkout extends React.Component {
   };
 
   handleBack = () => {
+
     this.setState(state => ({
       activeStep: state.activeStep - 1,
     }));
@@ -87,9 +79,49 @@ class Checkout extends React.Component {
     });
   };
 
+  externalLink = () => {
+    const products = this.props.pState.cart
+    let total = 0;
+    products.forEach(item => {
+      total += Number(item[1]) * Number(item[2])
+    })
+    axios.post('http://credit.17-356.isri.cmu.edu/api/transactions', {
+      companyId: '99',
+      amount: total
+    })
+      .then(function (response) {
+        console.log(response.data.id);
+        window.open('http://credit.17-356.isri.cmu.edu?transaction_id=' + response.data.id);
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    this.handleNext();
+
+  }
   render() {
     const { classes } = this.props;
     const { activeStep } = this.state;
+    var getStepContent = (step) => {
+      switch (step) {
+        case 0:
+          return <AddressForm adr={this.props.adr} />;
+        case 1:
+          return <PaymentForm handleNameChange={this.props.handleNameChange} />;
+        case 2:
+          return <Review pState={this.props.pState} />;
+        default:
+          throw new Error('Unknown step');
+      }
+    }
+
+    var condition;
+    if (activeStep === steps.length - 1) {
+      condition = this.externalLink
+    } else {
+      condition = this.handleNext;
+    }
 
     return (
       <React.Fragment>
@@ -113,7 +145,7 @@ class Checkout extends React.Component {
                     Thank you for your order.
                   </Typography>
                   <Typography variant="subtitle1">
-                    Your order number is #2001539. We have emailed your order confirmation, and will
+                    We will email you your order confirmation, and will
                     send you an update when your order has shipped.
                   </Typography>
                 </React.Fragment>
@@ -129,8 +161,9 @@ class Checkout extends React.Component {
                       <Button
                         variant="contained"
                         color="primary"
-                        onClick={this.handleNext}
+                        onClick={condition}
                         className={classes.button}
+
                       >
                         {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
                       </Button>

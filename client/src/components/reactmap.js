@@ -207,6 +207,7 @@ export class MapContainer extends Component {
 		Geocode.fromLatLng(newLat, newLng).then(
 			response => {
 				const address = response.results[0].formatted_address;
+				this.props.handleAdrChange('adr')(address)
 				this.setState({
 					displayedText: address
 				})

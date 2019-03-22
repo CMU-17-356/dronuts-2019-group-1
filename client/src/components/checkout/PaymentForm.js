@@ -13,9 +13,9 @@ export class PaymentForm extends React.Component {
   // amount should be passed in based on the current amount in cart
   // 101 is our group's companyID
   async onButtonClicked() {
-    const transactionVar = axios.post('http://credit.17-356.isri.cmu.edu/api/transactions',{
-                companyId : '101',
-                ammount : 15
+    const transactionVar = axios.post('http://credit.17-356.isri.cmu.edu/api/transactions', {
+      companyId: '101',
+      ammount: 15
     });
 
     const transactionResult = await transactionVar;
@@ -26,11 +26,28 @@ export class PaymentForm extends React.Component {
 
   render() {
     return (
-      <Button variant="contained" 
-              onClick = {this.onButtonClicked} 
-              Link to="/review">
-        Enter billing details with our secure commerce site
-      </Button>
+      <React.Fragment>
+        <Typography variant="h6" gutterBottom>
+          Personal Info
+        </Typography>
+        <Grid container spacing={24}>
+          <Grid item xs={12} md={6}>
+            <TextField required id="cardName" label="First Name" onChange={this.props.handleNameChange("fname")} fullWidth />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextField required id="lastName" label="Last Name" fullWidth onChange={this.props.handleNameChange("lname")} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextField required id="email" label="Email" onChange={this.props.handleNameChange("email")} fullWidth />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextField required id="phone" label="Phone Number" onChange={this.props.handleNameChange("phone")} fullWidth />
+          </Grid>
+          <Grid item xs={12}>
+
+          </Grid>
+        </Grid>
+      </React.Fragment>
     );
   }
 

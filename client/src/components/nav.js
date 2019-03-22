@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, Avatar } from '@material-ui/core';
 import logo from '../img/logo.png';
+import CurrentCart from './currentCart'
 
-const styles = {
+
+const styles = theme => ({
   colorChange: {
     colorDefault: "#000000"
   },
@@ -23,11 +25,23 @@ const styles = {
   avatar: {
     margin: 10,
   },
-};
+});
 
 
 class Nav extends Component {
+
+  calculateTotal = cart => {
+    var n = 0
+    cart.forEach(item => {
+      n = n + item[1];
+    })
+    return n
+
+  }
+
+
   render() {
+    const a = this.calculateTotal(this.props.cart)
     const { classes } = this.props;
     return (
       <div className={classes.root}>
@@ -38,7 +52,8 @@ class Nav extends Component {
               Dronuts
           </Typography>
             <Button component={Link} to="/menu" color="inherit">Menu</Button>
-            <Button component={Link} to="/cart" color="inherit">Cart</Button>
+            <CurrentCart total={a} cart={this.props.cart} handleRemoveProduct={this.props.handleRemoveProduct} />
+            {/* <Button component={Link} to="/cart" color="inherit">Cart</Button> */}
           </Toolbar>
         </AppBar>
       </div>
