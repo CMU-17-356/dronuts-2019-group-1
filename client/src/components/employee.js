@@ -13,8 +13,9 @@ function OrderRow(props){
 					<h2>Order #{props.id} </h2>
 					<b> Order Summary: </b>
 					<p>
-					1 x Glazed Donut  <br/>
-					2 x Sprinkled Donut 
+					1 x Apple Krumb  <br/>
+					1 x Bavarian Kreme <br/> 
+					1 x Boston Kreme 
 					</p>
 					<h3> Pack Into: Drone 1 </h3>
 				</div>
