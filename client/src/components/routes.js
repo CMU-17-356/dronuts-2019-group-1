@@ -9,7 +9,7 @@ import Checkout from './checkout/Checkout';
 import {IncomingOrdersList, IncomingOrdersRemoved} from './employee';
 
 import Login from './login';
-
+import Analytic from './analytics';
 
 class Routes extends Component {
   render() {
@@ -26,6 +26,7 @@ class Routes extends Component {
 
         <Route path="/login" component={Login} />
         <Route path="/drones" component={() => { window.location = 'http://drones.17-356.isri.cmu.edu'; return null;} }/>
+        <Route path="/analytics" component={Analytic} />
         <Route component={Error} />
       </Switch>
 
