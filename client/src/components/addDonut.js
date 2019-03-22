@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import './addDonut.css'
+
 class addDonut extends Component {
 	constructor(props){
 		super(props);
@@ -35,36 +37,47 @@ class addDonut extends Component {
 
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit}>
-				<label>
-					Donut Name:
+			<div id='addDonutForm'>
+				<h2> Add New Donut </h2>
+				<form onSubmit={this.handleSubmit}>
+					<label for="name">
+						Donut Name:
+					</label>
+					<br/>
 					<input 
+						id="name"
 						name="name" 
 						type="text" 
 						value={this.state.name} 
 						onChange={this.handleChange} />
-				</label>
-				<br/>
-				<label>
-					Price:
+					<br/>
+					<label for="price">
+						Price:
+						
+					</label>
+					<br/>
 					<input 
+						id="price"
 						name="price"
 						type="number" 
 						step="0.01" 
 						value={this.state.price} 
 						onChange={this.handleChange} />
-				</label>
-				<br/>
-				<label>
-					Ingredients (Separate by commas):
+					<br/>
+					<label for="ingredient_string">
+						Ingredients (Separate by commas):
+						
+					</label>
+					<br/>
 					<input 
+						id="ingredient_string"
 						name="ingredient_string"
 						type="text"
 						value={this.state.ingredient_string}
 						onChange={this.handleChange} />
-				</label>
-				<input type="submit" value="Submit" />
-			</form>
+					<input type="submit" value="Submit" />
+				</form>
+			</div>
 		);
 	}	
 }
