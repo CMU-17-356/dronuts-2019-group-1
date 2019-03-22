@@ -5,19 +5,32 @@ class addDonut extends Component {
 		this.state = {
 			name: '',
 			price: 0.00,
-
+			ingredient_string: '', //pre parse
+			ingredient: []
 		};
 
 		this.handleChange = this.handleChange.bind(this);
     	this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	parseIngredient(ingredient_string){
+
+	}
+
 	handleChange(event) {
-    	this.setState({value: event.target.value});
+		const name = event.target.name;
+    	this.setState({[name]: event.target.value});
+
+    	//call api to add new donut here 
+    	//set values from state parameters
+
+    	if (name == 'ingredient_string'){
+    		this.setState({ingredient: event.target.value.split(",")});
+    	}
   	}
 
 	handleSubmit(event) {
-		alert('A name was submitted: ' + this.state.value);
+		alert('A name was submitted: ' + this.state.name + this.state.price + this.state.ingredient);
 		event.preventDefault();
 	}
 
@@ -26,16 +39,35 @@ class addDonut extends Component {
 			<form onSubmit={this.handleSubmit}>
 				<label>
 					Donut Name:
-					<input type="text" value={this.state.name} onChange={this.handleChange} />
+					<input 
+						name="name" 
+						type="text" 
+						value={this.state.name} 
+						onChange={this.handleChange} />
 				</label>
+				<br/>
 				<label>
 					Price:
-					<input type="number" step="0.01" value={this.state.price} onChange={this.handleChange} />
+					<input 
+						name="price"
+						type="number" 
+						step="0.01" 
+						value={this.state.price} 
+						onChange={this.handleChange} />
+				</label>
+				<br/>
+				<label>
+					Ingredients (Separate by commas):
+					<input 
+						name="ingredient_string"
+						type="text"
+						value={this.state.ingredient_string}
+						onChange={this.handleChange} />
 				</label>
 				<input type="submit" value="Submit" />
 			</form>
 		);
 	}	
-};
+}
 
 export default addDonut;
