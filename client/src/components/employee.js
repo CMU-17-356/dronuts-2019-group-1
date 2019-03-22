@@ -33,24 +33,6 @@ class OrderRow extends Component{
 		//call api 
 	}
 
-<<<<<<< HEAD
-	return (
-		<tr>
-			<td align="center">
-				<div class="Incoming">
-					<h2>Order #{props.id} </h2>
-					<b> Order Summary: </b>
-					<p>
-					1 x Apple Krumb  <br/>
-					1 x Bavarian Kreme <br/> 
-					1 x Boston Kreme 
-					</p>
-					<h3> Pack Into: Drone 1 </h3>
-				</div>
-				<Link to='/employeee'>
-					<div class="confirmation_order_sent">
-						<SimpleSnackBar/>
-=======
 	render(){
 		return (
 			<tr>
@@ -74,7 +56,6 @@ class OrderRow extends Component{
 					        </label>
 					        <input type="submit" value="Submit" />
 					    </form>
->>>>>>> analytics
 					</div>
 					
 				</td>
