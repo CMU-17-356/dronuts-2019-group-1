@@ -10,7 +10,17 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Info from './info'
 import Added from './added'
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import SubIcon from '@material-ui/icons/Minimize'
+
 // import axios from 'axios;'
+
+import firebase from '../firebase-config'
+
+
+const db = firebase.firestore();
+
 
 const styles = theme => ({
   layout: {
@@ -48,13 +58,22 @@ class Donuts extends Component {
     donuts: []
   };
 
+
   async componentDidMount() {
     try {
-      const url = "/api/donuts";
-      const response = await fetch(url);
-      const data = await response.json();
-      this.setState({
-        donuts: data
+      db.collection('donuts').get().then(snapshot => {
+        var data = [];
+        if (snapshot.empty) {
+          console.log('no docs');
+          return
+        }
+        snapshot.forEach(doc => {
+          data.push(doc.data());
+
+        })
+        this.setState({
+          donuts: data
+        })
       })
     } catch (error) {
       this.setState({
@@ -72,7 +91,7 @@ class Donuts extends Component {
       <div className={classNames(classes.layout, classes.cardGrid)}>
         <Grid container spacing={40}>
           {donuts.map((donut, num) => (
-            <Grid item key={donut.id} sm={6} md={4} lg={3}>
+            <Grid item key={donut.name} sm={6} md={4} lg={3}>
               <Card className={classes.card}>
                 <CardMedia
                   className={classes.cardMedia}
@@ -86,7 +105,13 @@ class Donuts extends Component {
                   <Typography className={classes.downSpace} variant="h6" component="h6">
                     ${donut.price}
                   </Typography>
-
+                  <Fab color="primary" aria-label="Add" className={classes.fab} style={{ maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}>
+                    -
+                   <input />
+                  </Fab>
+                  <Fab color="primary" aria-label="Add" className={classes.fab} style={{ maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}>
+                    +
+                  </Fab>
                 </CardContent>
                 <CardActions>
                   <Info name={donut.name} desc={donut.description} />
