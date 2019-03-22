@@ -36,7 +36,9 @@ class App extends Component {
     fname: "",
     lname: "",
     email: "",
-    phone: ""
+    phone: "",
+    lat: "",
+    lng: ""
   }
 
   handleNameChange = val => e => {
@@ -48,6 +50,7 @@ class App extends Component {
     this.setState({
       [val]: adr
     })
+    console.log(this.state)
 
   }
   handleQtyChange = qty => {
