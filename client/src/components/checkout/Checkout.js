@@ -13,6 +13,7 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 import axios from 'axios';
 import firebase from '../../firebase-config'
+import donut from '../donut';
 const db = firebase.firestore();
 const styles = theme => ({
   appBar: {
@@ -58,6 +59,7 @@ const steps = ['Shipping address', 'Payment details', 'Review your order'];
 class Checkout extends React.Component {
   state = {
     activeStep: 0,
+    donutData: []
   };
 
   handleNext = () => {
@@ -79,6 +81,33 @@ class Checkout extends React.Component {
     });
   };
 
+  parsedDonuts = (lst) => {
+    var donuts = []
+    lst.map(i => (
+      donuts.push({
+        name: i[0],
+        qty: i[1],
+        price: i[2],
+        img: i[3]
+      })))
+
+    this.setState({
+      donutData: donuts
+    }, () => {
+      var data = {
+        first_name: this.props.pState.fname,
+        last_name: this.props.pState.lname,
+        lat: this.props.pState.lat,
+        lng: this.props.pState.lng,
+        donuts: this.state.donutData
+      }
+      db.collection('orders').add(data);
+      console.log(data);
+    })
+
+
+  }
+
   externalLink = () => {
     const products = this.props.pState.cart
     let total = 0;
@@ -97,7 +126,11 @@ class Checkout extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
+
+    this.parsedDonuts(this.props.pState.cart);
+
     this.handleNext();
+
 
   }
   render() {

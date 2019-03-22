@@ -208,6 +208,10 @@ export class MapContainer extends Component {
 			response => {
 				const address = response.results[0].formatted_address;
 				this.props.handleAdrChange('adr')(address)
+				this.props.handleAdrChange('lat')(newLat)
+				this.props.handleAdrChange('lng')(newLng)
+
+
 				this.setState({
 					displayedText: address
 				})
