@@ -21,9 +21,6 @@ class addDonut extends Component {
 		const name = event.target.name;
     	this.setState({[name]: event.target.value});
 
-    	//call api to add new donut here 
-    	//set values from state parameters
-
     	if (name == 'ingredient_string'){
     		this.setState({ingredient: event.target.value.split(",")});
     	}
@@ -32,6 +29,8 @@ class addDonut extends Component {
 	handleSubmit(event) {
 		alert('A name was submitted: ' + this.state.name + this.state.price + this.state.ingredient);
 		event.preventDefault();
+
+		//call api here to create new donut and set paramters to state values
 	}
 
 	render() {
