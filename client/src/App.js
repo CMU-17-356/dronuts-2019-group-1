@@ -7,6 +7,10 @@ import { BrowserRouter } from "react-router-dom";
 import './App.css';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
+import firebase from './firebase-config'
+
+
+const db = firebase.firestore();
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -24,13 +28,91 @@ const theme = createMuiTheme({
 });
 
 class App extends Component {
+  state = {
+    donuts: [],
+    cart: [],
+    qty: 1
+  }
+
+
+  handleQtyChange = qty => {
+    if (qty != '') {
+      qty = Number(qty)
+      this.setState({
+        qty: qty
+      });
+    }
+  };
+
+  handleRemoveProduct = (product) => {
+    let cart = this.state.cart;
+    let index = cart.findIndex(x => x[0] == product);
+    cart.splice(index, 1);
+    this.setState({
+      cart: cart
+
+    });
+
+  }
+
+  checkProduct = (product) => {
+    let cart = this.state.cart;
+    return cart.some((item) => {
+      return item[0] === product;
+    });
+  }
+
+  addToCart = selectedDonut => {
+
+    var cartItems = this.state.cart;
+    var data = selectedDonut
+    if (this.checkProduct(data.name)) {
+      let index = cartItems.findIndex(x => x[0] == data.name);
+      cartItems[index][1] =
+        Number(cartItems[index][1]) + Number(this.state.qty);
+    } else {
+      var tmpCart = [data.name, this.state.qty, data.price, data.img]
+      cartItems.push(tmpCart);
+    }
+    this.setState({
+      cart: cartItems
+    })
+    // console.log(this.state.cart)
+
+  }
+
+
+  async componentDidMount() {
+    try {
+      db.collection('donuts').get().then(snapshot => {
+        var data = [];
+        if (snapshot.empty) {
+          console.log('no docs');
+          return
+        }
+        snapshot.forEach(doc => {
+          data.push(doc.data());
+
+        })
+        this.setState({
+          donuts: data
+        })
+      })
+    } catch (error) {
+      this.setState({
+        error
+      })
+    }
+
+  }
   render() {
     return (
       <MuiThemeProvider theme={theme}>
         <BrowserRouter>
           <div>
-            <Nav />
-            <Routes />
+            <Nav cart={this.state.cart} handleRemoveProduct={this.handleRemoveProduct} />
+            <Routes pState={this.state} handleQtyChange={this.handleQtyChange}
+              addToCart={this.addToCart} />
             <Footer />
           </div>
         </BrowserRouter>

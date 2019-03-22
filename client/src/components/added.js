@@ -79,6 +79,7 @@ class CustomizedSnackbars extends React.Component {
 
   handleClick = () => {
     this.setState({ open: true });
+    this.props.addToCart(this.props.donut)
   };
 
   handleClose = (event, reason) => {
@@ -108,8 +109,7 @@ class CustomizedSnackbars extends React.Component {
         >
           <MySnackbarContentWrapper
             onClose={this.handleClose}
-            variant="success"
-            message="Added to Cart"
+            message={"Added " + this.props.qty + " " + this.props.donut.name}
           />
         </Snackbar>
 

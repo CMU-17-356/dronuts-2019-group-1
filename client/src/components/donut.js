@@ -14,11 +14,6 @@ import TextField from '@material-ui/core/TextField';
 
 // import axios from 'axios;'
 
-import firebase from '../firebase-config'
-
-
-const db = firebase.firestore();
-
 
 const styles = theme => ({
   layout: {
@@ -70,7 +65,7 @@ class Donut extends Component {
     if (num == 0) {
       num = '';
     }
-
+    this.props.handleQtyChange(num)
     this.setState({
       [name]: num,
     });
@@ -112,7 +107,7 @@ class Donut extends Component {
           </CardContent>
           <CardActions>
             <Info name={donut.name} desc={donut.description} />
-            <Added />
+            <Added addToCart={this.props.addToCart} donut={donut} qty={this.props.qty} />
           </CardActions>
         </Card>
       </Grid>

@@ -6,12 +6,6 @@ import PropTypes from 'prop-types';
 import Donut from './donut';
 // import axios from 'axios;'
 
-import firebase from '../firebase-config'
-
-
-const db = firebase.firestore();
-
-
 const styles = theme => ({
   layout: {
     width: 'auto',
@@ -49,57 +43,18 @@ const styles = theme => ({
 
 class Donuts extends Component {
   state = {
-    donuts: [],
     qty: ''
   };
 
-
-  // handleChange = name => event => {
-
-  //   var num = Number(event.target.value);
-  //   if (num < 0) {
-  //     num = 0;
-  //   }
-
-
-  //   this.setState({
-  //     [name]: num,
-  //   });
-  // };
-
-  async componentDidMount() {
-    try {
-      db.collection('donuts').get().then(snapshot => {
-        var data = [];
-        if (snapshot.empty) {
-          console.log('no docs');
-          return
-        }
-        snapshot.forEach(doc => {
-          data.push(doc.data());
-
-        })
-        this.setState({
-          donuts: data
-        })
-      })
-    } catch (error) {
-      this.setState({
-        error
-      })
-    }
-
-  }
-
   render() {
     const { classes } = this.props;
-    const { donuts } = this.state;
+    const { donuts } = this.props;
 
     return (
       <div className={classNames(classes.layout, classes.cardGrid)}>
         <Grid container spacing={40}>
           {donuts.map((donut) => (
-            <Donut key={donut.name} dnut={donut} />
+            <Donut key={donut.name} qty={this.props.qty} dnut={donut} handleQtyChange={this.props.handleQtyChange} addToCart={this.props.addToCart} />
           ))}
         </Grid>
       </div >

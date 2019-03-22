@@ -6,7 +6,7 @@ import Error from './error';
 import ReactMap from './reactmap';
 
 import Checkout from './checkout/Checkout';
-import {IncomingOrdersList, IncomingOrdersRemoved} from './employee';
+import { IncomingOrdersList, IncomingOrdersRemoved } from './employee';
 
 import Login from './login';
 import Analytic from './analytics';
@@ -18,7 +18,7 @@ class Routes extends Component {
 
       <Switch>
         <Route exact path="/" component={Main} />
-        <Route path="/menu" component={Menu} />
+        <Route path="/menu" render={() => <Menu qty={this.props.pState.qty} donuts={this.props.pState.donuts} handleQtyChange={this.props.handleQtyChange} addToCart={this.props.addToCart} />} />
         <Route path="/cart" component={Checkout} />
         <Route path="/location" component={ReactMap} />
 
@@ -26,7 +26,7 @@ class Routes extends Component {
         <Route path="/employeee" component={IncomingOrdersRemoved} />
 
         <Route path="/login" component={Login} />
-        <Route path="/drones" component={() => { window.location = 'http://drones.17-356.isri.cmu.edu'; return null;} }/>
+        <Route path="/drones" component={() => { window.location = 'http://drones.17-356.isri.cmu.edu'; return null; }} />
         <Route path="/analytics" component={Analytic} />
         <Route path="/add_donut" component={addDonut} />
         <Route component={Error} />
