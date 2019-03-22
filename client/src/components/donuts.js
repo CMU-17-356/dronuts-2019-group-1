@@ -10,9 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Info from './info'
 import Added from './added'
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import SubIcon from '@material-ui/icons/Minimize'
+import TextField from '@material-ui/core/TextField';
 
 // import axios from 'axios;'
 
@@ -35,6 +33,10 @@ const styles = theme => ({
   },
   cardGrid: {
     padding: `${theme.spacing.unit * 8}px 0`,
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
   },
   card: {
     height: '100%',
@@ -105,13 +107,16 @@ class Donuts extends Component {
                   <Typography className={classes.downSpace} variant="h6" component="h6">
                     ${donut.price}
                   </Typography>
-                  <Fab color="primary" aria-label="Add" className={classes.fab} style={{ maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}>
-                    -
-                   <input />
-                  </Fab>
-                  <Fab color="primary" aria-label="Add" className={classes.fab} style={{ maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}>
-                    +
-                  </Fab>
+                  <TextField
+                    id="filled-number"
+                    label="Qty"
+                    // value={this.state.age}
+                    // onChange={this.handleChange('age')}
+                    type="number"
+                    className={classes.textField}
+                    margin="normal"
+                  />
+
                 </CardContent>
                 <CardActions>
                   <Info name={donut.name} desc={donut.description} />
