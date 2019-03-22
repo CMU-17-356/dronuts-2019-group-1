@@ -7,38 +7,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 
-const products = [
-  {
-    "id": 0,
-    "name": "Apple Krumb",
-    "description": "Liquorice wafer cupcake toffee chupa chups donut candy",
-    "price": "$3.50",
-    "img": "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg"
-  },
-  {
-    "id": 1,
-    "name": "Bavarian Kreme",
-    "description": "Pastry gummies sweet roll lemon. Brownie soufflé danish",
-    "price": "$2.50",
-    "img": "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/bavarian_kreme.jpg"
-  },
-  {
-    "id": 2,
-    "name": "Boston Kreme",
-    "description": "Chocolate chocolate fruitcake oat cake jujubes cheesecake.",
-    "price": "$4.25",
-    "img": "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/boston_kreme.jpg"
-  },
-  { name: 'Shipping', desc: '', price: 'Free' },
-];
-const addresses = ['Gates Center for Computer Science', 'Pittsburgh', 'PA 15213', 'USA'];
-const payments = [
-  { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr Jonathan Fung' },
-  { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date', detail: '04/2024' },
-];
-
+function money_round(num) {
+  return Math.ceil(num * 100) / 100;
+}
 const styles = theme => ({
   listItem: {
     padding: `${theme.spacing.unit}px 0`,
@@ -53,6 +24,12 @@ const styles = theme => ({
 
 function Review(props) {
   const { classes } = props;
+  const products = props.pState.cart
+  let total = 0;
+  products.forEach(item => {
+    total += Number(item[1]) * Number(item[2])
+  })
+  const addresses = props.pState.adr
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -60,43 +37,29 @@ function Review(props) {
       </Typography>
       <List disablePadding>
         {products.map(product => (
-          <ListItem className={classes.listItem} key={product.name}>
-            <ListItemText primary={product.name} secondary={product.description} />
-            <Typography variant="body2">{product.price}</Typography>
+          <ListItem className={classes.listItem} key={product[0]}>
+            <ListItemText primary={product[0] + " " + product[1] + " x $" + product[2]} secondary={product[4]} />
+            <Typography variant="body2">${money_round(Number(product[2]) * Number(product[1]))}</Typography>
           </ListItem>
         ))}
         <ListItem className={classes.listItem}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" className={classes.total}>
-            $10.25
+            {"$ " + money_round(total)}
           </Typography>
         </ListItem>
       </List>
       <Grid container spacing={16}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
-            Shipping
+            Customer Info
           </Typography>
-          <Typography gutterBottom>Jonathan Fung</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
+          <Typography gutterBottom>{props.pState.fname} {props.pState.lname}</Typography>
+          <Typography gutterBottom>{addresses}</Typography>
+          <Typography gutterBottom>{props.pState.phone}</Typography>
+          <Typography gutterBottom>{props.pState.email}</Typography>
         </Grid>
-        <Grid item container direction="column" xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom className={classes.title}>
-            Payment details
-          </Typography>
-          <Grid container>
-            {payments.map(payment => (
-              <React.Fragment key={payment.name}>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.name}</Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.detail}</Typography>
-                </Grid>
-              </React.Fragment>
-            ))}
-          </Grid>
-        </Grid>
+
       </Grid>
     </React.Fragment>
   );

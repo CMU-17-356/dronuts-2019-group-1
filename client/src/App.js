@@ -31,10 +31,25 @@ class App extends Component {
   state = {
     donuts: [],
     cart: [],
-    qty: 1
+    qty: 1,
+    adr: "Current Address",
+    fname: "",
+    lname: "",
+    email: "",
+    phone: ""
   }
 
+  handleNameChange = val => e => {
+    this.setState({
+      [val]: e.target.value
+    })
+  }
+  handleAdrChange = val => adr => {
+    this.setState({
+      [val]: adr
+    })
 
+  }
   handleQtyChange = qty => {
     if (qty != '') {
       qty = Number(qty)
@@ -71,7 +86,7 @@ class App extends Component {
       cartItems[index][1] =
         Number(cartItems[index][1]) + Number(this.state.qty);
     } else {
-      var tmpCart = [data.name, this.state.qty, data.price, data.img]
+      var tmpCart = [data.name, this.state.qty, data.price, data.img, data.description]
       cartItems.push(tmpCart);
     }
     this.setState({
@@ -107,12 +122,13 @@ class App extends Component {
   }
   render() {
     return (
+
       <MuiThemeProvider theme={theme}>
         <BrowserRouter>
           <div>
             <Nav cart={this.state.cart} handleRemoveProduct={this.handleRemoveProduct} />
-            <Routes pState={this.state} handleQtyChange={this.handleQtyChange}
-              addToCart={this.addToCart} />
+            <Routes adr={this.state.adr} pState={this.state} handleQtyChange={this.handleQtyChange}
+              addToCart={this.addToCart} handleNameChange={this.handleNameChange} handleAdrChange={this.handleAdrChange} />
             <Footer />
           </div>
         </BrowserRouter>

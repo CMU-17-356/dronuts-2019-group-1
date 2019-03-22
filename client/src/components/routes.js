@@ -19,8 +19,8 @@ class Routes extends Component {
       <Switch>
         <Route exact path="/" component={Main} />
         <Route path="/menu" render={() => <Menu qty={this.props.pState.qty} donuts={this.props.pState.donuts} handleQtyChange={this.props.handleQtyChange} addToCart={this.props.addToCart} />} />
-        <Route path="/cart" component={Checkout} />
-        <Route path="/location" component={ReactMap} />
+        <Route path="/cart" render={() => <Checkout adr={this.props.pState.adr} handleNameChange={this.props.handleNameChange} pState={this.props.pState} />} />
+        <Route path="/location" render={() => <ReactMap handleAdrChange={this.props.handleAdrChange} />} />
 
         <Route path="/employee" component={IncomingOrdersList} />
         <Route path="/employeee" component={IncomingOrdersRemoved} />
