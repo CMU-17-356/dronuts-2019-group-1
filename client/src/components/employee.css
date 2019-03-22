@@ -1,0 +1,31 @@
+table, th, td {
+	border: 1px solid black;
+	margin-left:auto; 
+    margin-right:auto;
+}
+
+td {
+	padding: 20px;
+	width: 500px;
+}
+
+.incoming {
+	display: inline-block;
+}
+
+.confirmation_order_sent {
+	
+	
+	display: inline-block;
+}
+
+.confirmation_order_sent button {
+	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
